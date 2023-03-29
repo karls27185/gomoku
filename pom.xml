@@ -9,7 +9,7 @@
     <version>3.0</version>
 
     <name>Gomoku</name>
-    <description>The gomoku simple game using console and GUI mode</description>
+    <description>The gomoku simple game using GUI mode</description>
     <url>https://web.babayan.keenetic.link/</url>
     <organization>
         <name>Babayan Karlen</name>
