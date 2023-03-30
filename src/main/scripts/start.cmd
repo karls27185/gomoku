@@ -28,7 +28,7 @@ echo `java.exe` not defined! Install or configure JVM before using this script! 
 echo -------------------------------------------------------------------------- >&2
 set RETURN_COD=1
 ) else (
-@rem Запустить игру gomoku
+@rem Запустить игру tictactoe
 %JAVA_CMD% -jar ${project.build.finalName}-release.jar %*
 set RETURN_CODE=0
 )

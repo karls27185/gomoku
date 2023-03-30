@@ -5,11 +5,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>babayan.keenetic.link</groupId>
-    <artifactId>gomoku</artifactId>
-    <version>3.0</version>
+    <artifactId>tictactoe</artifactId>
+    <version>3.1</version>
 
-    <name>Gomoku</name>
-    <description>The gomoku simple game using console and GUI mode</description>
+    <name>TicTacToe</name>
+    <description>The tictactoe simple game using GUI mode</description>
     <url>https://web.babayan.keenetic.link/</url>
     <organization>
         <name>Babayan Karlen</name>
@@ -34,9 +34,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/karls27185/gomoku.git</connection>
-        <developerConnection>scm:git:ssh://github.com:karls27185/gomoku.git</developerConnection>
-        <url>http://github.com/karls27185/gomoku/tree/master</url>
+        <connection>scm:git:git://github.com/karls27185/tictactoe.git</connection>
+        <developerConnection>scm:git:ssh://github.com:karls27185/tictactoe.git</developerConnection>
+        <url>http://github.com/karls27185/tictactoe/tree/master</url>
     </scm>
 
     <properties>
@@ -92,7 +92,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>academy.devonline.gomoku.Launcher</mainClass>
+                                <mainClass>academy.devonline.tictactoe.Launcher</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

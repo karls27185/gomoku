@@ -15,7 +15,7 @@
   ~
   -->
 
-<project name="Build JRE for gomoku game" default="build-jre" basedir=".">
+<project name="Build JRE for tictactoe game" default="build-jre" basedir=".">
 
     <!-- ******************************* SCRIPT CONFIGS ******************************* -->
     <!-- JPMS modules -->
