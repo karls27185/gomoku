@@ -28,12 +28,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static academy.devonline.gomoku.Constants.GAME_TABLE_SIZE;
+
 /**
  * @author Karl
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
  */
 public class GameWindow extends JFrame implements DataPrinter, UserInputReader, GameOverHandler {
-    private static final int GAME_TABLE_SIZE = 3;
     private static final int FONT_SIZE = 35;
     private static final int CELL_SIZE = 150;
     private final JLabel[][] cells = new JLabel[GAME_TABLE_SIZE][GAME_TABLE_SIZE];

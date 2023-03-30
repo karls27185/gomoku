@@ -22,19 +22,13 @@ import academy.devonline.gomoku.model.game.GameTable;
 import academy.devonline.gomoku.model.game.Player;
 import academy.devonline.gomoku.model.game.Sign;
 
+import static academy.devonline.gomoku.Constants.WIN_COMBINATION_SIZE;
+
 /**
  * @author Karl
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
  */
 public class WinnerVerifier {
-
-//    public boolean isUserWin(final GameTable gameTable) {
-//        return isWinner(gameTable, X);
-//    }
-//
-//    public boolean isComputerWin(final GameTable gameTable) {
-//        return isWinner(gameTable, O);
-//    }
 
     public boolean isWinner(final GameTable gameTable, final Player player) {
         return isWinnerByRows(gameTable, player.getSing()) ||
@@ -44,7 +38,7 @@ public class WinnerVerifier {
     }
 
     private boolean isWinnerByRows(final GameTable gameTable, final Sign sign) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < WIN_COMBINATION_SIZE; i++) {
             if (gameTable.getSign(new Cell(i, 0)) == gameTable.getSign(new Cell(i, 1)) &&
                     gameTable.getSign(new Cell(i, 1)) == gameTable.getSign(new Cell(i, 2)) &&
                     gameTable.getSign(new Cell(i, 2)) == sign) {
@@ -55,7 +49,7 @@ public class WinnerVerifier {
     }
 
     private boolean isWinnerByCols(final GameTable gameTable, final Sign sign) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < WIN_COMBINATION_SIZE; i++) {
             if (gameTable.getSign(new Cell(0, i)) == gameTable.getSign(new Cell(1, i)) &&
                     gameTable.getSign(new Cell(1, i)) == gameTable.getSign(new Cell(2, i)) &&
                     gameTable.getSign(new Cell(2, i)) == sign) {

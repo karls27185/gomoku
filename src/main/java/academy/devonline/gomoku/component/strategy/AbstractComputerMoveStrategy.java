@@ -24,6 +24,9 @@ import academy.devonline.gomoku.model.game.Sign;
 
 import java.util.Random;
 
+import static academy.devonline.gomoku.Constants.GAME_TABLE_SIZE;
+import static academy.devonline.gomoku.Constants.WIN_COMBINATION_SIZE;
+
 /**
  * @author Karl
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
@@ -56,13 +59,13 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
 
     @SuppressWarnings("Convert2MethodRef")
     private void findBestCellsForMoveByRows(final GameTable gameTable, final Sign findSign, final BestCells bestCells) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < GAME_TABLE_SIZE; i++) {
             findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells, i, (k, j) -> new Cell(k, j));
         }
     }
 
     private void findBestCellsForMoveByCols(final GameTable gameTable, final Sign findSign, final BestCells bestCells) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < GAME_TABLE_SIZE; i++) {
             findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells, i, (k, j) -> new Cell(j, k));
         }
     }
@@ -86,7 +89,7 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
                                                            final Lambda lambda) {
         int countEmptyCells = 0;
         int countSignCells = 0;
-        final Cell[] localEmptyCell = new Cell[3];
+        final Cell[] localEmptyCell = new Cell[WIN_COMBINATION_SIZE];
         int count = 0;
         for (int j = 0; j < 3; j++) {
             final Cell cell = lambda.convert(i, j);
@@ -100,7 +103,7 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
             }
         }
         if (countEmptyCells == expectedCountEmptyCells &&
-                countSignCells == 3 - expectedCountEmptyCells) {
+                countSignCells == WIN_COMBINATION_SIZE - expectedCountEmptyCells) {
             for (int j = 0; j < count; j++) {
                 bestCells.add(localEmptyCell[j]);
             }
@@ -114,7 +117,7 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
 
     private static class BestCells {
 
-        private final Cell[] emptyCells = new Cell[9];
+        private final Cell[] emptyCells = new Cell[GAME_TABLE_SIZE * GAME_TABLE_SIZE];
 
         private int count;
 
