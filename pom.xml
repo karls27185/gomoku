@@ -92,7 +92,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>academy.devonline.tictactoe.Launcher</mainClass>
+                                <mainClass>tictactoe.Launcher</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
