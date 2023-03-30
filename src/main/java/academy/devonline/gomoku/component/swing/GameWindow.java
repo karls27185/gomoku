@@ -107,11 +107,6 @@ public class GameWindow extends JFrame implements DataPrinter, UserInputReader, 
         //
     }
 
-//    @Override
-//    public void printMappingTable() {
-//        //
-//    }
-
     @Override
     public void printGameTable(final GameTable gameTable) {
         for (int i = 0; i < GAME_TABLE_SIZE; i++) {

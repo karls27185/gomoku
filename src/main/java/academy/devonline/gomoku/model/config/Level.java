@@ -35,14 +35,6 @@ public enum Level {
             new PreventUserWinComputerMoveStrategy(),
             new FirstMoveToTheCenterComputerMoveStrategy(),
             new RandomComputerMoveStrategy()
-    }),
-
-    LEVEL3(new ComputerMoveStrategy[]{
-            new WinNowComputerMoveStrategy(),
-            new PreventUserWinComputerMoveStrategy(),
-            new WinOnTheNextStepComputerMoveStrategy(),
-            new FirstMoveToTheCenterComputerMoveStrategy(),
-            new RandomComputerMoveStrategy()
     });
 
     private final ComputerMoveStrategy[] strategies;
