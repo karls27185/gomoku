@@ -67,6 +67,6 @@ public class GameFactory {
                 player2,
                 new WinnerVerifier(),
                 new CellVerifier(),
-                gameWindow, canSecondPlayerMakeFirstMove);
+                canSecondPlayerMakeFirstMove);
     }
 }
