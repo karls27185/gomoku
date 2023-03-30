@@ -57,26 +57,34 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
         }
     }
 
-    @SuppressWarnings("Convert2MethodRef")
-    private void findBestCellsForMoveByRows(final GameTable gameTable, final Sign findSign, final BestCells bestCells) {
-        for (int i = 0; i < GAME_TABLE_SIZE; i++) {
-            findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells, i, (k, j) -> new Cell(k, j));
-        }
-    }
-
-    private void findBestCellsForMoveByCols(final GameTable gameTable, final Sign findSign, final BestCells bestCells) {
-        for (int i = 0; i < GAME_TABLE_SIZE; i++) {
-            findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells, i, (k, j) -> new Cell(j, k));
-        }
-    }
-
-    private void findBestCellsForMoveByMainDiagonal(final GameTable gameTable, final Sign findSign, final BestCells bestCells) {
-        findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells, -1, (k, j) -> new Cell(j, j));
+    private void findBestCellsForMoveByRows(final GameTable gameTable,
+                                            final Sign findSign,
+                                            final BestCells bestCells) {
+        findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells,
+                (i, j, k) -> new Cell(i, j + k));
 
     }
 
-    private void findBestCellsForMoveBySecondaryDiagonal(final GameTable gameTable, final Sign findSign, final BestCells bestCells) {
-        findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells, -1, (k, j) -> new Cell(j, 2 - j));
+    private void findBestCellsForMoveByCols(final GameTable gameTable,
+                                            final Sign findSign,
+                                            final BestCells bestCells) {
+        findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells,
+                (i, j, k) -> new Cell(j + k, i));
+    }
+
+    private void findBestCellsForMoveByMainDiagonal(final GameTable gameTable,
+                                                    final Sign findSign,
+                                                    final BestCells bestCells) {
+        findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells,
+                (i, j, k) -> new Cell(i + k, j + k));
+
+    }
+
+    private void findBestCellsForMoveBySecondaryDiagonal(final GameTable gameTable,
+                                                         final Sign findSign,
+                                                         final BestCells bestCells) {
+        findBestCellsForMoveUsingLambdaConversion(gameTable, findSign, bestCells,
+                (i, j, k) -> new Cell(i + k, j - k));
 
     }
 
@@ -85,34 +93,39 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
     private void findBestCellsForMoveUsingLambdaConversion(final GameTable gameTable,
                                                            final Sign findSign,
                                                            final BestCells bestCells,
-                                                           final int i,
                                                            final Lambda lambda) {
-        int countEmptyCells = 0;
-        int countSignCells = 0;
-        final Cell[] localEmptyCell = new Cell[WIN_COMBINATION_SIZE];
-        int count = 0;
-        for (int j = 0; j < 3; j++) {
-            final Cell cell = lambda.convert(i, j);
-            if (gameTable.isEmpty(cell)) {
-                localEmptyCell[count++] = cell;
-                countEmptyCells++;
-            } else if (gameTable.getSign(cell) == findSign) {
-                countSignCells++;
-            } else {
-                break;
-            }
-        }
-        if (countEmptyCells == expectedCountEmptyCells &&
-                countSignCells == WIN_COMBINATION_SIZE - expectedCountEmptyCells) {
-            for (int j = 0; j < count; j++) {
-                bestCells.add(localEmptyCell[j]);
+        for (int i = 0; i < GAME_TABLE_SIZE; i++) {
+            for (int j = 0; j < GAME_TABLE_SIZE; j++) {
+                final Cell[] localEmptyCells = new Cell[WIN_COMBINATION_SIZE];
+                int index = 0;
+                int countEmptyCells = 0;
+                int countSignCells = 0;
+                for (int k = 0; k < WIN_COMBINATION_SIZE; k++) {
+                    final Cell cell = lambda.convert(i, j, k);
+                    if (gameTable.isValid(cell)) {
+                        if (gameTable.isEmpty(cell)) {
+                            countEmptyCells++;
+                            localEmptyCells[index++] = cell;
+                        } else if (gameTable.getSign(cell) == findSign) {
+                            countSignCells++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if (countEmptyCells == expectedCountEmptyCells &&
+                        countSignCells == WIN_COMBINATION_SIZE - expectedCountEmptyCells) {
+                    for (int l = 0; l < index; l++) {
+                        bestCells.add(localEmptyCells[l]);
+                    }
+                }
             }
         }
     }
 
     @FunctionalInterface
     private interface Lambda {
-        Cell convert(int k, int j);
+        Cell convert(int i, int j, int k);
     }
 
     private static class BestCells {
@@ -122,6 +135,12 @@ public abstract class AbstractComputerMoveStrategy implements ComputerMoveStrate
         private int count;
 
         private void add(final Cell cell) {
+            for (int i = 0; i < count; i++) {
+                final Cell emptyCell = emptyCells[i];
+                if (emptyCell.getRow() == cell.getRow() && emptyCell.getCol() == cell.getCol()){
+                    return;
+                }
+            }
             emptyCells[count++] = cell;
         }
     }

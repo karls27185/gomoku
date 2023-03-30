@@ -33,8 +33,8 @@ public class GameTable {
 
     public GameTable() {
         table = new Sign[GAME_TABLE_SIZE][GAME_TABLE_SIZE];
-        for (int i = 0; i < GAME_TABLE_SIZE; i++){
-            for (int j = 0; j < GAME_TABLE_SIZE; j++){
+        for (int i = 0; i < GAME_TABLE_SIZE; i++) {
+            for (int j = 0; j < GAME_TABLE_SIZE; j++) {
                 table[i][j] = EMPTY;
             }
         }
@@ -53,6 +53,11 @@ public class GameTable {
     //позволяет обновить ячейку новым значением
     public void setSign(final Cell cell, final Sign sign) {
         table[cell.getRow()][cell.getCol()] = sign;
+    }
+
+    public boolean isValid(final Cell cell) {
+        return cell.getRow() >= 0 && cell.getRow() < GAME_TABLE_SIZE &&
+                cell.getCol() >= 0 && cell.getCol() < GAME_TABLE_SIZE;
     }
 
     @Override

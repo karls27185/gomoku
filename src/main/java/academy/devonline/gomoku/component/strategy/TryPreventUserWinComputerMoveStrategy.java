@@ -23,14 +23,13 @@ import academy.devonline.gomoku.model.game.Sign;
  * @author Karl
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
  */
-public class WinNowComputerMoveStrategy extends AbstractComputerMoveStrategy {
-
-    public WinNowComputerMoveStrategy() {
-        super(1);
+public class TryPreventUserWinComputerMoveStrategy extends AbstractComputerMoveStrategy {
+    public TryPreventUserWinComputerMoveStrategy(final int expectedCountEmptyCells) {
+        super(expectedCountEmptyCells);
     }
 
     @Override
     protected Sign getFindSign(final Sign moveSign) {
-        return moveSign;
+        return moveSign.oppositeSign();
     }
 }

@@ -35,8 +35,8 @@ import static academy.devonline.gomoku.Constants.GAME_TABLE_SIZE;
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
  */
 public class GameWindow extends JFrame implements DataPrinter, UserInputReader, GameOverHandler {
-    private static final int FONT_SIZE = 35;
-    private static final int CELL_SIZE = 150;
+    private static final int FONT_SIZE = 25;
+    private static final int CELL_SIZE = 40;
     private final JLabel[][] cells = new JLabel[GAME_TABLE_SIZE][GAME_TABLE_SIZE];
     private Cell clickedCell;
 
