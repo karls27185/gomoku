@@ -29,6 +29,8 @@ import java.util.Random;
  */
 public class Game {
 
+    private final int size;
+
     private final DataPrinter dataPrinter;
 
     private final Player player1;
@@ -41,12 +43,14 @@ public class Game {
 
     private final boolean canSecondPlayerMakeFirstMove;
 
-    public Game(final DataPrinter dataPrinter,
+    public Game(final int size,
+                final DataPrinter dataPrinter,
                 final Player player1,
                 final Player player2,
                 final WinnerVerifier winnerVerifier,
                 final CellVerifier cellVerifier,
                 final boolean canSecondPlayerMakeFirstMove) {
+        this.size = size;
         this.dataPrinter = dataPrinter;
         this.player1 = player1;
         this.player2 = player2;
@@ -64,7 +68,7 @@ public class Game {
     }
 
     private void playNewGame() {
-        final GameTable gameTable = new GameTable();
+        final GameTable gameTable = new GameTable(size);
         dataPrinter.printGameTable(gameTable);
         if (canSecondPlayerMakeFirstMove && new Random().nextBoolean()) {
             player2.makeMove(gameTable);
@@ -87,33 +91,6 @@ public class Game {
                     return;
                 }
             }
-//            userMove.make(gameTable);
-//            dataPrinter.printGameTable(gameTable);
-//            if (winnerVerifier.isUserWin(gameTable)) {
-//                System.out.println("YOU WIN!");
-//                break;
-//            }
-//
-//            if (cellVerifier.allCellsFilled(gameTable)) {
-//                System.out.println("Sorry, DRAW!");
-//                break;
-//            }
-//
-//            computerMove.make(gameTable);
-//            dataPrinter.printGameTable(gameTable);
-//            if (winnerVerifier.isComputerWin(gameTable)) {
-//                System.out.println("COMPUTER WIN!");
-//                break;
-//            }
-//
-//            if (cellVerifier.allCellsFilled(gameTable)) {
-//                System.out.println("Sorry, DRAW!");
-//                break;
-//            }
         }
     }
-
-//    private void printGameOver() {
-//        dataPrinter.printInfoMessage("GAME OVER!");
-//    }
 }

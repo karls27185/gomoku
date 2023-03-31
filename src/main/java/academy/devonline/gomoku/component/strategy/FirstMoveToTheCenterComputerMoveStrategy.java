@@ -22,8 +22,6 @@ import academy.devonline.gomoku.model.game.Cell;
 import academy.devonline.gomoku.model.game.GameTable;
 import academy.devonline.gomoku.model.game.Sign;
 
-import static academy.devonline.gomoku.Constants.GAME_TABLE_SIZE;
-
 /**
  * @author Karl
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
@@ -31,7 +29,8 @@ import static academy.devonline.gomoku.Constants.GAME_TABLE_SIZE;
 public class FirstMoveToTheCenterComputerMoveStrategy implements ComputerMoveStrategy {
     @Override
     public boolean tryToMakeMove(final GameTable gameTable, final Sign sign) {
-        final Cell cell = new Cell(GAME_TABLE_SIZE / 2, GAME_TABLE_SIZE / 2);
+        final Cell cell = new Cell(gameTable.getSize() / 2,
+                gameTable.getSize() / 2);
         if (gameTable.isEmpty(cell)) {
             gameTable.setSign(cell, sign);
             return true;
