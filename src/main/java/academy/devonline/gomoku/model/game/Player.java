@@ -32,13 +32,10 @@ public final class Player {
         this.move = move;
     }
 
-    public Sign getSing() {
+    public Sign getSign() {
         return sing;
     }
 
-//    public Move getMove() {
-//        return move;
-//    }
 
     public void makeMove(final GameTable gameTable) {
         move.make(gameTable, sing);
