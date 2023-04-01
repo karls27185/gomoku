@@ -1,3 +1,3 @@
 @echo off
 @rem -------------------------------------------------------------------------------------------------------------------
-start.cmd console computer computer
+start.cmd computer computer

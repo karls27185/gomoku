@@ -20,6 +20,8 @@ package academy.devonline.gomoku.component;
 import academy.devonline.gomoku.model.game.GameTable;
 import academy.devonline.gomoku.model.game.Sign;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author Karl
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
@@ -28,8 +30,11 @@ public class ComputerMove implements Move {
 
     private final ComputerMoveStrategy[] strategies;
 
-    public ComputerMove(final ComputerMoveStrategy[] strategies) {
+    private final long delayInMillis;
+
+    public ComputerMove(final ComputerMoveStrategy[] strategies, final long delayInMillis) {
         this.strategies = strategies;
+        this.delayInMillis = delayInMillis;
     }
 
     @Override
@@ -37,6 +42,13 @@ public class ComputerMove implements Move {
 
         for (final ComputerMoveStrategy strategy : strategies) {
             if (strategy.tryToMakeMove(gameTable, sign)) {
+                if (delayInMillis > 0) {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(delayInMillis);
+                    } catch (final InterruptedException exception) {
+                        exception.printStackTrace();
+                    }
+                }
                 return;
             }
         }

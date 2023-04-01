@@ -40,12 +40,15 @@ public class GameFactory {
 
     private final int size;
 
+    private final long delayInMillis;
+
     public GameFactory(final String[] args) {
         final CommandLineArgumentParser.CommandLineArguments commandLineArguments = new CommandLineArgumentParser(args).parse();
         player1Type = commandLineArguments.getPlayer1Type();
         player2Type = commandLineArguments.getPlayer2Type();
         level = commandLineArguments.getLevel();
         size = commandLineArguments.getSize().intValue();
+        delayInMillis = commandLineArguments.getDelayInMillis();
     }
 
     public Game create() {
@@ -54,13 +57,13 @@ public class GameFactory {
         if (player1Type == USER) {
             player1 = new Player(X, new UserMove(gameWindow, gameWindow));
         } else {
-            player1 = new Player(X, new ComputerMove(level.getStrategies()));
+            player1 = new Player(X, new ComputerMove(level.getStrategies(), delayInMillis));
         }
         final Player player2;
         if (player2Type == USER) {
             player2 = new Player(O, new UserMove(gameWindow, gameWindow));
         } else {
-            player2 = new Player(O, new ComputerMove(level.getStrategies()));
+            player2 = new Player(O, new ComputerMove(level.getStrategies(), delayInMillis));
         }
         final boolean canSecondPlayerMakeFirstMove = player1Type != player2Type;
         return new Game(
