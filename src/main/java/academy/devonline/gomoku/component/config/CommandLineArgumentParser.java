@@ -21,7 +21,7 @@ import academy.devonline.gomoku.model.config.Level;
 import academy.devonline.gomoku.model.config.PlayerType;
 import academy.devonline.gomoku.model.config.Size;
 
-import static academy.devonline.gomoku.Constants.DELAY_PREFIX;
+import static academy.devonline.gomoku.Constants.*;
 import static academy.devonline.gomoku.model.config.Size.SIZE15;
 import static academy.devonline.gomoku.model.config.Level.*;
 import static academy.devonline.gomoku.model.config.PlayerType.COMPUTER;
@@ -32,6 +32,9 @@ import static academy.devonline.gomoku.model.config.PlayerType.USER;
  * @link <a href="https://babayan.keenetic.link/">https://babayan.keenetic.link</a>
  */
 public class CommandLineArgumentParser {
+
+    private static final long DEFAULT_DELAY_IN_MILLIS_NOT_DEFINED = -1;
+
     private final String[] args;
 
     public CommandLineArgumentParser(final String[] args) {
@@ -43,7 +46,7 @@ public class CommandLineArgumentParser {
         PlayerType player2Type = null;
         Level level = null;
         Size size = null;
-        long delayInMillis = -1;
+        long delayInMillis = DEFAULT_DELAY_IN_MILLIS_NOT_DEFINED;
         for (final String arg : args) {
             if (USER.name().equalsIgnoreCase(arg) ||
                     COMPUTER.name().equalsIgnoreCase(arg)) {
@@ -75,7 +78,7 @@ public class CommandLineArgumentParser {
                             arg, size);
                 }
             } else if (arg.toUpperCase().startsWith(DELAY_PREFIX)) {
-                if (delayInMillis == -1) {
+                if (delayInMillis == DEFAULT_DELAY_IN_MILLIS_NOT_DEFINED) {
                     delayInMillis = getDelayInMillis(arg);
                 } else {
                     System.err.printf(
@@ -88,10 +91,10 @@ public class CommandLineArgumentParser {
             }
         }
         if (level == null) {
-            level = LEVEL2;
+            level = DEFAULT_LEVEL;
         }
         if (size == null) {
-            size = SIZE15;
+            size = DEFAULT_SIZE;
         }
         if (player1Type == null) {
             return new CommandLineArguments(USER, COMPUTER, level, size, delayInMillis);
@@ -109,7 +112,7 @@ public class CommandLineArgumentParser {
                     "Invalid command line argument: '%s', because it must be follow the next pattern: 'delay=${DELAY_IN_MILLIS}'!%n",
                     arg
             );
-            return 0;
+            return DEFAULT_DELAY_IN_MILLIS;
         }
         try {
             final long result = Long.parseLong(values[1]);
@@ -118,7 +121,7 @@ public class CommandLineArgumentParser {
                         "Invalid command line argument: '%s', because delay value must be positive!%n",
                         arg
                 );
-                return 0;
+                return DEFAULT_DELAY_IN_MILLIS;
             }
             return result;
         } catch (final NumberFormatException exception) {
@@ -126,7 +129,7 @@ public class CommandLineArgumentParser {
                     "Invalid command line argument: '%s', because delay value must be a long value!%n",
                     arg
             );
-            return 0;
+            return DEFAULT_DELAY_IN_MILLIS;
         }
     }
 
