@@ -42,6 +42,7 @@ public enum Level {
             new PreventUserWinComputerMoveStrategy(),
             new WinOnTheNextStepComputerMoveStrategy(),
             new FirstMoveToTheCenterComputerMoveStrategy(),
+            new ComputerSecondMoveStrategy(),
             new RandomComputerMoveStrategy()
     });
 
